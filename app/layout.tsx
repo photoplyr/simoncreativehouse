@@ -37,6 +37,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Oktagon Chat Bubble */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.chatbaseConfig = { 
+                chatbotId: 'wRhOqCI0QZBLihaE7mTh', 
+                domain: 'https://data.oktagonapp.com',
+                assetsBaseUrl: 'https://oktagonapp.com/assets/'
+              };
+            `,
+          }}
+        />
+        <script src="https://oktagonapp.com/embed-custom-fixed.js" defer />
+      </head>
       <body className={`font-sans ${montserrat.variable} ${jetbrainsMono.variable} antialiased`}>
         <ThemeProvider>
           <Suspense fallback={null}>{children}</Suspense>

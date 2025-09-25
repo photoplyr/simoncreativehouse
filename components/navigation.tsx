@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"
+// import { ThemeToggle } from "@/components/theme-toggle"
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -13,7 +13,7 @@ const navItems = [
   { name: "Services", href: "/services" },
   { name: "About", href: "/about" },
   { name: "Clients", href: "/clients" },
-  { name: "Contact", href: "/contact" },
+  // { name: "Contact", href: "/contact" },
 ]
 
 export function Navigation() {
@@ -45,7 +45,6 @@ export function Navigation() {
                 {item.name}
               </Link>
             ))}
-            <ThemeToggle />
             <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold" asChild>
               <Link
                 href="https://calendly.com/hello-simoncreativehouse/30min"
@@ -59,7 +58,6 @@ export function Navigation() {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
-            <ThemeToggle />
             <Button variant="ghost" size="sm" onClick={() => setIsOpen(!isOpen)} className="text-foreground">
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>

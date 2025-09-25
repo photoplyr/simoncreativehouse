@@ -1,26 +1,62 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { MapPin, Phone, Mail, Clock } from "lucide-react"
+import { LucideIcon, MapPin, Phone, Mail, Clock, Youtube, Linkedin, Instagram } from "lucide-react"
 
-const contactDetails = [
+type ContactDetail = {
+  icon: LucideIcon
+  title: string
+  details: Array<{ label: string; href?: string }>
+}
+
+type SocialLink = {
+  name: string
+  href: string
+  icon: LucideIcon
+}
+
+const contactDetails: ContactDetail[] = [
   {
     icon: MapPin,
     title: "Location",
-    details: ["Phoenix, Arizona", "Serving clients globally"],
+    details: [
+      { label: "Phoenix, Arizona" },
+      { label: "Serving clients globally" },
+    ],
   },
   {
     icon: Phone,
     title: "Phone",
-    details: ["+1 (480) 555-0123"],
+    details: [{ label: "+1 (480) 555-0123", href: "tel:+14805550123" }],
   },
   {
     icon: Mail,
     title: "Email",
-    details: ["hello@simoncreativehouse.com", "projects@simoncreativehouse.com"],
+    details: [{ label: "hello@simoncreativehouse.com", href: "mailto:hello@simoncreativehouse.com" }],
   },
   {
     icon: Clock,
     title: "Response Time",
-    details: ["Within 24 hours", "Monday - Friday"],
+    details: [
+      { label: "Within 24 hours" },
+      { label: "Monday - Friday" },
+    ],
+  },
+]
+
+const socialLinks: SocialLink[] = [
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/@simoncreativehouse",
+    icon: Youtube,
+  },
+  {
+    name: "LinkedIn",
+    href: "https://linkedin.com/company/simon-creative-house/",
+    icon: Linkedin,
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/simoncreativehouse/?hl=en",
+    icon: Instagram,
   },
 ]
 
@@ -45,17 +81,57 @@ export function ContactInfo() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground mb-1">{item.title}</h3>
-                  {item.details.map((detail, detailIndex) => (
-                    <p key={detailIndex} className="text-muted-foreground text-sm">
-                      {detail}
-                    </p>
-                  ))}
+                  {item.details.map((detail, detailIndex) => {
+                    if (!detail.href) {
+                      return (
+                        <p key={detailIndex} className="text-muted-foreground text-sm">
+                          {detail.label}
+                        </p>
+                      )
+                    }
+
+                    const isExternal = detail.href.startsWith("http")
+
+                    return (
+                      <a
+                        key={detailIndex}
+                        href={detail.href}
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noreferrer" : undefined}
+                        className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                      >
+                        {detail.label}
+                      </a>
+                    )
+                  })}
                 </div>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
+
+      <Card className="bg-card/60 border-border">
+        <CardContent className="p-6 space-y-3">
+          <h3 className="font-semibold text-foreground">Connect with us</h3>
+          <div className="flex flex-wrap gap-3">
+            {socialLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              >
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <link.icon className="h-4 w-4" />
+                </span>
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       <Card className="bg-primary/5 border-primary/20">
         <CardContent className="p-6">

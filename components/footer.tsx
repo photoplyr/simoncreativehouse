@@ -3,6 +3,24 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Instagram, Linkedin, Youtube } from "lucide-react"
 
+const socialLinks = [
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/simoncreativehouse/?hl=en",
+    icon: Instagram,
+  },
+  {
+    name: "LinkedIn",
+    href: "https://linkedin.com/company/simon-creative-house/",
+    icon: Linkedin,
+  },
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/@simoncreativehouse",
+    icon: Youtube,
+  },
+]
+
 export function Footer() {
   return (
     <footer className="bg-card border-t border-border">
@@ -28,7 +46,14 @@ export function Footer() {
               We create cinematic stories people can feel, for brands people can trust.
             </p>
             <div className="text-sm text-muted-foreground">
-              <p>hello@simoncreative.house</p>
+              <p>
+                <a
+                  href="mailto:hello@simoncreativehouse.com"
+                  className="hover:text-primary transition-colors"
+                >
+                  hello@simoncreativehouse.com
+                </a>
+              </p>
               <p>Scottsdale, AZ</p>
             </div>
           </div>
@@ -52,11 +77,7 @@ export function Footer() {
                   About
                 </Link>
               </li>
-              <li>
-                <Link href="/contact" className="text-muted-foreground hover:text-accent transition-colors">
-                  Contact
-                </Link>
-              </li>
+              
             </ul>
           </div>
 
@@ -64,15 +85,18 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-foreground mb-4">Follow Us</h3>
             <div className="flex space-x-4">
-              <Link href="#" className="text-muted-foreground hover:text-accent transition-colors">
-                <Instagram className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-accent transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-accent transition-colors">
-                <Youtube className="h-5 w-5" />
-              </Link>
+              {socialLinks.map(({ name, href, icon: Icon }) => (
+                <Link
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={name}
+                  className="text-muted-foreground hover:text-accent transition-colors"
+                >
+                  <Icon className="h-5 w-5" />
+                </Link>
+              ))}
             </div>
           </div>
         </div>
